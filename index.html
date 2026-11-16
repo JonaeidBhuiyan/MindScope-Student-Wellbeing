@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#f3f0e8">
+  <title>MindScope — Student Wellness</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500;1,600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="ambient ambient-one"></div>
+  <div class="ambient ambient-two"></div>
+  <header class="topbar">
+    <a class="brand" href="#"><span class="brand-mark">m.</span><span>mindscope</span></a>
+    <div class="top-note"><span class="live-dot"></span> STUDENT WELLNESS TOOL</div>
+    <div class="top-index">PERSONAL CHECK-IN <span>01 / 01</span></div>
+  </header>
+
+  <main class="page-shell">
+    <section class="intro">
+      <div class="eyebrow"><span class="eyebrow-line"></span> A MOMENT FOR YOURSELF</div>
+      <h1>Get to know<br>your <em>wellbeing.</em></h1>
+      <p class="intro-copy">Small habits tell a bigger story. Take a moment to reflect on your everyday rhythm and discover the score predicted by your machine-learning model.</p>
+      <div class="intro-foot"><span>✳</span> YOUR WELLBEING, IN FOCUS</div>
+    </section>
+
+    <section class="workspace">
+      <form id="assessmentForm" class="form-panel">
+        <div class="panel-heading">
+          <div><div class="section-kicker">THE CHECK-IN</div><h2>About you<span class="asterisk">*</span></h2></div>
+          <div class="step-number">01 <i>—</i> 03</div>
+        </div>
+
+        <div class="form-section">
+          <div class="section-title"><span>01</span><div><h3>Your basics</h3><p>A little context to begin with.</p></div></div>
+          <div class="fields two-col">
+            <label class="field"><span>Age <b>*</b></span><input type="number" name="Age" min="1" placeholder="e.g. 22" required></label>
+            <label class="field"><span>Gender <b>*</b></span><select name="Gender" required><option value="" disabled selected>Select gender</option><option>Male</option><option>Female</option></select></label>
+            <label class="field"><span>Country <b>*</b></span><input type="text" name="Country" placeholder="Your country" required></label>
+            <label class="field"><span>Academic level <b>*</b></span><select name="Academic_Level" required><option value="" disabled selected>Select level</option><option>Undergraduate</option><option>Graduate</option><option>High School</option></select></label>
+          </div>
+        </div>
+
+        <div class="form-section">
+          <div class="section-title"><span>02</span><div><h3>Your digital rhythm</h3><p>How social platforms fit into your day.</p></div></div>
+          <div class="fields two-col">
+            <label class="field"><span>Most used platform <b>*</b></span><select name="Most_Used_Platform" required><option value="" disabled selected>Choose platform</option><option>Facebook</option><option>LinkedIn</option><option>Instagram</option><option>Snapchat</option><option>Twitter</option><option>YouTube</option><option>TikTok</option><option>LINE</option><option>KakaoTalk</option><option>VKontakte</option><option>WhatsApp</option><option>WeChat</option></select></label>
+            <label class="field"><span>Main purpose <b>*</b></span><select name="Purpose_Of_Use" required><option value="" disabled selected>Choose purpose</option><option>Networking</option><option>Education</option><option>Entertainment</option><option>News</option></select></label>
+            <label class="field"><span>Average daily usage <small>(hours)</small> <b>*</b></span><input type="number" name="Avg_Daily_Usage_Hours" min="0" step="0.1" placeholder="e.g. 4.5" required></label>
+            <label class="field"><span>Daily unlocks <b>*</b></span><input type="number" name="Daily_Unlocks" min="0" step="1" placeholder="e.g. 30" required></label>
+          </div>
+        </div>
+
+        <div class="form-section last-section">
+          <div class="section-title"><span>03</span><div><h3>Your daily balance</h3><p>The routines that shape your day.</p></div></div>
+          <div class="fields two-col">
+            <label class="field"><span>Study hours / day <b>*</b></span><input type="number" name="Study_Hours" min="0" step="0.1" placeholder="e.g. 5" required></label>
+            <label class="field"><span>Physical activity <small>(hours/day)</small> <b>*</b></span><input type="number" name="Physical_Activity_Hours" min="0" step="0.1" placeholder="e.g. 1" required></label>
+            <label class="field"><span>Sleep per night <small>(hours)</small> <b>*</b></span><input type="number" name="Sleep_Hours_Per_Night" min="0" max="24" step="0.1" placeholder="e.g. 7.5" required></label>
+            <label class="field"><span>Current stress level <b>*</b></span><select name="Stress_Level" required><option value="" disabled selected>Select level</option><option>Low</option><option>Medium</option><option>High</option><option>Very High</option></select></label>
+          </div>
+        </div>
+
+        <div id="errorMessage" class="error-message" role="alert"></div>
+        <button class="submit-button" id="submitButton" type="submit"><span>Generate my score</span><span class="button-arrow">↗</span></button>
+        <p class="form-note"><span>↳</span> Your answers are sent to the prediction API running locally on your computer.</p>
+      </form>
+
+      <aside class="result-column">
+        <div class="result-card" id="resultCard">
+          <div class="result-top"><span class="section-kicker">YOUR SNAPSHOT</span><span class="result-symbol">✳</span></div>
+          <div class="result-title">A clearer view<br>starts <em>here.</em></div>
+          <div class="score-stage" id="scoreStage">
+            <div class="score-ring" id="scoreRing"><div class="ring-inner"><span class="score-value" id="scoreValue">—</span><span class="score-caption">PREDICTED SCORE</span></div></div>
+          </div>
+          <div class="result-status" id="resultStatus"><span class="status-dot"></span><span id="statusText">WAITING FOR YOUR ANSWERS</span></div>
+          <p class="result-description" id="resultDescription">Complete the check-in to reveal the score returned by your trained model.</p>
+          <div class="result-bottom"><span>MINDSCOPE / WELLNESS</span><span>✳</span><span>01</span></div>
+        </div>
+        <div class="aside-note"><span class="note-star">✳</span><div><strong>A gentle reminder</strong><p>Your wellbeing is more than a number. This is a model prediction, not a clinical diagnosis.</p></div></div>
+      </aside>
+    </section>
+    <footer class="footer"><span>MINDSCOPE © 2026</span><span>MADE FOR A MORE MINDFUL DAY</span><span>TAKE IT ONE DAY AT A TIME ↗</span></footer>
+  </main>
+  <script src="script.js"></script>
+</body>
+</html>
